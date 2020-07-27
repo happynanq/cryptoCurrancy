@@ -1,18 +1,45 @@
-/**container*/
-.currency{
-
+body{
+  background-color: #e6e1e1;
 }
 
+/**container*/
+.currency{
+}
+/*wrapper of each element*/
+.wrapper{
+  background-color: #c9c6c6;
+  padding: 10px;
+}
+.wrapper:first-child{
+  margin-top:10px;
+  
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+.wrapper:last-child{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+}
 /* ! info, top of card*/
 
 
 .info{
-  
+
 }
 .img{
 
 }
 .name{
+  font-size: 20px;
+
+}
+.symbol{
+  margin-right: 4px;
+  padding-right: 4px;
+  border-right: 2px solid #a19e9e;
+  border-radius: 1px;
 
 }
 .cost{
@@ -20,11 +47,21 @@
 }
 /* ! course, bottom of card*/
 .course{
-
+  background-color: #c0c0c0;
+  padding:10px ;
+  border-radius: 20px;
 }
 .hours{
 
 }
+.hours>span{
+  padding-left: 5px;
+}
+
 .days{
+
+}
+.days>span{
+  padding-left: 5px;
 
 }

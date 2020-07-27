@@ -13,7 +13,7 @@ router.post("/", async(req,res)=>{
     // TODO: Подключить монгус, сделать модель даты, сделать в ней хедер отвечающий за кеширование
 
 
-    const response = rp("https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?sort=cmc_rank&limit=2 ",{
+    const response = rp("https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?sort=cmc_rank&limit=10 ",{
       //https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=1
       //https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?sort=cmc_rank&limit=2
       headers
@@ -36,16 +36,39 @@ router.post("/", async(req,res)=>{
       dataQuotes  =JSON.parse(dataQuotes).data
 
       //!GO DATA FROM REQ TO ARRAY
-
+      //* ! NEED to ARRAY: 
+        //*?name of crypto
+        //*?symbol
+        //*?logo
+        //*current cost
+        //*24h currency
+        //*7d currency
+      //*
       let newData =[]
       let quoteArray = []
+      let endData = {
+        data:[
+
+        ]
+      }
       res.data.map(d=>{
         newData.push(dataInfo[d.symbol].logo)
         quoteArray.push(dataQuotes[d.symbol])
+        let quote = dataQuotes[d.symbol].quote.USD
+        endData.data.push(
+          {
+            name:d.name,
+            symbol:d.symbol, 
+            logo:dataInfo[d.symbol].logo, 
+            currentCost: quote.price,
+            change24h : quote.percent_change_24h,
+            change7d : quote.percent_change_7d,
+          })
       })
-      console.log("quote array: ",quoteArray)
+      console.log(endData)
+
       
-      return {dataInfo:res.data, quoteInfo:dataQuotes, logo:newData}
+      return {data:endData}
     })
     
     let data = await response

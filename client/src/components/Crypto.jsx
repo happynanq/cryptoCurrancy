@@ -1,30 +1,42 @@
 import React from 'react'
 
-const Crypto =(props)=>{
+const Crypto =({d})=>{
+    const toCurrencyDollars=(n)=>{
+    const newN = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'USD' }).format(n)
+    return newN>0 ? "-"+newN : newN
+  
+  }
   return(
-    <div className="row">
+    <div className=" wrapper">
       <div className="row info">
         <div className="col s1 img">
-          img
+          <img src={d.logo} alt="logo"/>
         </div>
         <div className="col s5 name">
-          name
+          <span className="symbol">{d.symbol}</span>
+          <span>{ d.name}</span>
+
+          
         </div>
         <div className="col s6 cost">
-        cost
-        <span> 9800$</span>
+        <span> {toCurrencyDollars(d.currentCost)}</span>
         </div>
       </div>
       <div className="row course">
         <div className="col s6 hours">
           24h
-          <span>+5%</span>
+          <span style={d.change24h<0?{color:"#c92424"} : {color:"#1da164"}}>
+            {toCurrencyDollars(d.change24h)}
+          </span>
         </div>
         <div className="col s6 days">
           7d
-          <span>+10</span>
+          <span style={d.change7d<0?{color:"#c92424"} : {color:"#1da164"}} >
+            {toCurrencyDollars(d.change7d)}
+          </span>
         </div>
       </div>
+      <hr/>
     </div>
   )
 }

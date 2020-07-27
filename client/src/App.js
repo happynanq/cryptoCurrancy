@@ -13,16 +13,14 @@ function App() {
         method:"POST"
       }).then(r=>r.json())
       let data = await response
-      console.log(data)
-      setData(data)
+      setData(data.data.data)
     }
-    // start()
-    setData([1,2,3])
+    start()
   }, [])
   return (
     <div className="container">
       <div className="currency">
-        {data.map(d=><Crypto/>)}
+        {data?.data?.map(d=><Crypto d={d} />)}
 
       </div>
     </div>
