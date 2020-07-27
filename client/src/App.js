@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Crypto from './components/Crypto';
 
 
 function App() {
+  const [data, setData] = useState([])
   useEffect(() => {
     const start = async()=>{
       const response = fetch("/api", {
@@ -12,12 +14,17 @@ function App() {
       }).then(r=>r.json())
       let data = await response
       console.log(data)
+      setData(data)
     }
-    start()
+    // start()
+    setData([1,2,3])
   }, [])
   return (
-    <div className="App">
-      
+    <div className="container">
+      <div className="currency">
+        {data.map(d=><Crypto/>)}
+
+      </div>
     </div>
   );
 }
